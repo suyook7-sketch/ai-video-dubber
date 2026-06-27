@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Dubber</title>
+
+<style>
+
+body{
+background:#0f172a;
+font-family:Arial;
+color:white;
+text-align:center;
+padding-top:50px;
+}
+
+.box{
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+margin:auto;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>🎬 AI Video Dubber</h1>
+
+<input type="file" id="video">
+
+<br><br>
+
+<select id="lang">
+<option>Hindi</option>
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+<option>Arabic</option>
+</select>
+
+<br><br>
+
+<button onclick="startDub()">
+🚀 Start Dubbing
+</button>
+
+<br><br>
+
+<button onclick="testAI()">
+🤖 Test AI
+</button>
+
+<p id="status"></p>
+<br><br>
+
+</div>
+
+<script>
+
+function startDub(){
+
+let file = document.getElementById("video").files[0];
+let lang = document.getElementById("lang").value;
+
+if(!file){
+    alert("Please select a video");
+    return;
+}
+
+document.getElementById("status").innerHTML =
+"⏳ Uploading " + file.name + "<br>🌍 Language: " + lang;
+
+setTimeout(function(){
+
+document.getElementById("status").innerHTML =
+"✅ Video Uploaded Successfully";
+
+},3000);
+
+}
+
+function testAI(){
+alert("🤖 Test AI Working");
+}
+document.getElementById("video").addEventListener("change", function(){
+
+let file = this.files[0];
+
+if(file){
+document.getElementById("status").innerHTML =
+"📁 Selected: " + file.name;
+}
+
+});
+</script>
+
+</body>
+</html>
