@@ -1,117 +1,137 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AI Dubber</title>
+<title>AI Video Dubber</title>
 
 <style>
-
 body{
 background:#0f172a;
-font-family:Arial;
 color:white;
+font-family:Arial,sans-serif;
 text-align:center;
-padding-top:50px;
+padding:30px;
 }
 
-.box{
-background:#1e293b;
-padding:30px;
-border-radius:20px;
-width:90%;
-max-width:400px;
+.container{
+max-width:500px;
 margin:auto;
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+input,select,button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:8px;
+font-size:16px;
 }
 
 button{
-background:#2563eb;
+background:#0ea5e9;
 color:white;
-border:none;
-padding:15px 25px;
-border-radius:10px;
-font-size:18px;
+font-weight:bold;
 cursor:pointer;
 }
 
+button:hover{
+background:#0284c7;
+}
+
+#status{
+margin-top:20px;
+font-size:18px;
+}
+
+a{
+color:#22c55e;
+font-weight:bold;
+}
 </style>
 
 </head>
-
 <body>
 
-<div class="box">
+<div class="container">
 
 <h1>🎬 AI Video Dubber</h1>
 
-<input type="file" id="video">
-
-<br><br>
+<input type="file" id="video" accept="video/*">
 
 <select id="lang">
-<option>Hindi</option>
-<option>English</option>
-<option>Spanish</option>
-<option>French</option>
-<option>Arabic</option>
+<option value="Hindi">Hindi</option>
+<option value="English">English</option>
+<option value="Spanish">Spanish</option>
+<option value="French">French</option>
+<option value="Japanese">Japanese</option>
 </select>
 
-<br><br>
+<button onclick="startDub()">🚀 Start Dub</button>
 
-<button onclick="startDub()">
-🚀 Start Dubbing
-</button>
-
-<br><br>
-
-<button onclick="testAI()">
-🤖 Test AI
-</button>
-
-<p id="status"></p>
-<br><br>
+<div id="status"></div>
 
 </div>
 
 <script>
 
-function startDub(){
+async function startDub(){
 
-let file = document.getElementById("video").files[0];
-let lang = document.getElementById("lang").value;
+const file=document.getElementById("video").files[0];
+const lang=document.getElementById("lang").value;
+const status=document.getElementById("status");
 
 if(!file){
-    alert("Please select a video");
-    return;
+alert("Please select a video");
+return;
 }
 
-document.getElementById("status").innerHTML =
-"⏳ Uploading " + file.name + "<br>🌍 Language: " + lang;
+status.innerHTML="⏳ Uploading video...";
 
-setTimeout(function(){
+const formData=new FormData();
+formData.append("video",file);
+formData.append("lang",lang);
 
-document.getElementById("status").innerHTML =
-"✅ Video Uploaded Successfully";
+try{
 
-},3000);
-
-}
-
-function testAI(){
-alert("🤖 Test AI Working");
-}
-document.getElementById("video").addEventListener("change", function(){
-
-let file = this.files[0];
-
-if(file){
-document.getElementById("status").innerHTML =
-"📁 Selected: " + file.name;
-}
-
+const response=await fetch("https://ai-video-dubber-api.sdrama679.workers.dev/",{
+method:"POST",
+body:formData
 });
+
+const data=await response.json();
+
+if(data.success){
+
+status.innerHTML=`
+✅ Video Dubbed Successfully
+<br><br>
+<a href="${data.download}" target="_blank">
+⬇ Download Dubbed Video
+</a>
+`;
+
+}else{
+
+status.innerHTML="❌ "+(data.error||"Failed");
+
+}
+
+}catch(err){
+
+status.innerHTML="❌ Server Error";
+
+}
+
+}
+
 </script>
 
 </body>
