@@ -3,59 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Video Dubber</title>
+<title>AI Video Dubber V2</title>
 
-<style>
-body{
-background:#0f172a;
-color:white;
-font-family:Arial,sans-serif;
-text-align:center;
-padding:30px;
-}
-
-.container{
-max-width:500px;
-margin:auto;
-background:#1e293b;
-padding:20px;
-border-radius:15px;
-}
-
-h1{
-color:#38bdf8;
-}
-
-input,select,button{
-width:100%;
-padding:12px;
-margin-top:12px;
-border:none;
-border-radius:8px;
-font-size:16px;
-}
-
-button{
-background:#0ea5e9;
-color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:#0284c7;
-}
-
-#status{
-margin-top:20px;
-font-size:18px;
-}
-
-a{
-color:#22c55e;
-font-weight:bold;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -67,72 +17,22 @@ font-weight:bold;
 <input type="file" id="video" accept="video/*">
 
 <select id="lang">
-<option value="Hindi">Hindi</option>
-<option value="English">English</option>
-<option value="Spanish">Spanish</option>
-<option value="French">French</option>
-<option value="Japanese">Japanese</option>
+<option>Hindi</option>
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+<option>Arabic</option>
 </select>
 
-<button onclick="startDub()">🚀 Start Dub</button>
+<button onclick="startDub()">
+🚀 Start Dubbing
+</button>
 
-<div id="status"></div>
+<p id="status">Select a video to begin.</p>
 
 </div>
 
-<script>
-
-async function startDub(){
-
-const file=document.getElementById("video").files[0];
-const lang=document.getElementById("lang").value;
-const status=document.getElementById("status");
-
-if(!file){
-alert("Please select a video");
-return;
-}
-
-status.innerHTML="⏳ Uploading video...";
-
-const formData=new FormData();
-formData.append("video",file);
-formData.append("lang",lang);
-
-try{
-
-const response=await fetch("https://ai-video-dubber-api.sdrama679.workers.dev/",{
-method:"POST",
-body:formData
-});
-
-const data=await response.json();
-
-if(data.success){
-
-status.innerHTML=`
-✅ Video Dubbed Successfully
-<br><br>
-<a href="${data.download}" target="_blank">
-⬇ Download Dubbed Video
-</a>
-`;
-
-}else{
-
-status.innerHTML="❌ "+(data.error||"Failed");
-
-}
-
-}catch(err){
-
-status.innerHTML="❌ Server Error";
-
-}
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
