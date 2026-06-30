@@ -27,7 +27,17 @@
 <button onclick="startDub()">
 🚀 Start Dubbing
 </button>
+  
+<video id="preview" controls style="width:100%;margin-top:20px;display:none;border-radius:10px;"></video>
 
+<div id="progress" style="margin-top:20px;display:none;">
+  <progress id="bar" value="0" max="100" style="width:100%;"></progress>
+</div>
+
+<button id="downloadBtn" style="display:none;margin-top:20px;">
+⬇️ Download Dubbed Video
+</button>
+  
 <p id="status">Select a video to begin.</p>
 
 </div>
