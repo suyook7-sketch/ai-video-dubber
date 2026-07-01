@@ -1,5 +1,6 @@
 const videoInput = document.getElementById("video");
 const lang = document.getElementById("lang");
+const voice = document.getElementById("voice");
 const status = document.getElementById("status");
 
 videoInput.addEventListener("change", () => {
@@ -20,6 +21,7 @@ async function startDub(){
     const formData = new FormData();
     formData.append("video", videoInput.files[0]);
     formData.append("language", lang.value);
+    formData.append("voice", voice.value);
 
     try{
 
