@@ -44,3 +44,42 @@ async function startDub(){
     }
 
 }
+
+// ===== Version 3 =====
+
+// Video Preview
+videoInput.addEventListener("change", () => {
+  if (videoInput.files.length > 0) {
+    const preview = document.getElementById("preview");
+    preview.src = URL.createObjectURL(videoInput.files[0]);
+    preview.style.display = "block";
+  }
+});
+
+// Progress Bar
+function showProgress() {
+  const progress = document.getElementById("progress");
+  const bar = document.getElementById("bar");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  progress.style.display = "block";
+  downloadBtn.style.display = "none";
+  bar.value = 0;
+
+  let value = 0;
+
+  const timer = setInterval(() => {
+    value += 10;
+    bar.value = value;
+
+    if (value >= 100) {
+      clearInterval(timer);
+      status.innerHTML = "✅ Dubbing Completed!";
+      downloadBtn.style.display = "block";
+    }
+  }, 500);
+}
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+  alert("⬇️ Download feature will come in Version 4.");
+});
