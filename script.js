@@ -37,6 +37,14 @@ async function startDub(){
 
         status.innerHTML =
         "✅ " + (data.message || "Request sent successfully");
+        
+         if (data.downloadUrl) {
+    const downloadBtn = document.getElementById("downloadBtn");
+    downloadBtn.style.display = "block";
+    downloadBtn.onclick = () => {
+        window.open(data.downloadUrl, "_blank");
+    };
+        }
 
     showProgress();
         
