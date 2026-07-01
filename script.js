@@ -36,6 +36,8 @@ async function startDub(){
         status.innerHTML =
         "✅ " + (data.message || "Request sent successfully");
 
+    showProgress();
+        
     }catch(error){
 
         status.innerHTML =
