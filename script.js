@@ -26,7 +26,7 @@ async function startDub(){
     try{
 
         const response = await fetch(
-            "https://ai-video-dubber-api.sdrama679.workers.dev/",
+            "https://suyook-ai-video-dubber-api-new.hf.space/dub",
             {
                 method:"POST",
                 body:formData
