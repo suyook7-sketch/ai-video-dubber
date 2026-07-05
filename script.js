@@ -32,15 +32,17 @@ async function startDub() {
 
         status.innerHTML = "✅ " + data.message;
 
-        if (data.downloadUrl) {
-            downloadBtn.style.display = "block";
-            downloadBtn.onclick = () => {
-                window.open(
-                    "https://suyook-ai-video-dubber-api-new.hf.space" + data.downloadUrl,
-                    "_blank"
-                );
-            };
-        }
+        if (data.audio) {
+    const downloadBtn = document.getElementById("downloadBtn");
+    downloadBtn.style.display = "block";
+
+    downloadBtn.onclick = () => {
+        window.open(
+            "https://suyook-ai-video-dubber-api-new.hf.space" + data.audio,
+            "_blank"
+        );
+    };
+}
 
     } catch (err) {
         status.innerHTML = "❌ " + err.message;
