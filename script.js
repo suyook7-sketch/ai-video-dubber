@@ -31,7 +31,7 @@ async function startDub() {
         const data = await response.json();
 
         status.innerHTML = "✅ " + data.message;
-
+        
         if (data.audio) {
     const downloadBtn = document.getElementById("downloadBtn");
     downloadBtn.style.display = "block";
