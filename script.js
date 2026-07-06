@@ -28,7 +28,13 @@ async function startDub() {
             }
         );
 
-        const data = await response.json();
+        const text = await response.text();
+
+        if (!response.ok) {
+        throw new Error(text);
+        }
+
+        const data = JSON.parse(text);
 
         status.innerHTML = "✅ " + data.message;
         
