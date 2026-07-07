@@ -38,13 +38,13 @@ async function startDub() {
 
         status.innerHTML = "✅ " + data.message;
         
-        if (data.audio) {
-    const downloadBtn = document.getElementById("downloadBtn");
+        if (data.video) {
     downloadBtn.style.display = "block";
+    downloadBtn.innerHTML = "⬇️ Download Dubbed Video";
 
     downloadBtn.onclick = () => {
         window.open(
-            "https://suyook-ai-video-dubber-api-new.hf.space" + data.audio,
+            "https://suyook-ai-video-dubber-api-new.hf.space" + data.video,
             "_blank"
         );
     };
