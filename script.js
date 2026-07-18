@@ -3,6 +3,7 @@ const lang = document.getElementById("lang");
 const voice = document.getElementById("voice");
 const status = document.getElementById("status");
 const downloadBtn = document.getElementById("downloadBtn");
+const subtitleBtn = document.getElementById("subtitleBtn");
 
 async function startDub() {
 
@@ -45,6 +46,17 @@ async function startDub() {
     downloadBtn.onclick = () => {
         window.open(
             "https://suyook-ai-video-dubber-api-new.hf.space" + data.video,
+            "_blank"
+        );
+    };
+}
+        if (data.subtitle) {
+    subtitleBtn.style.display = "block";
+    subtitleBtn.innerHTML = "📄 Download Subtitle";
+
+    subtitleBtn.onclick = () => {
+        window.open(
+            "https://suyook-ai-video-dubber-api-new.hf.space" + data.subtitle,
             "_blank"
         );
     };
