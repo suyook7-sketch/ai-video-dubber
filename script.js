@@ -36,10 +36,7 @@ async function startDub() {
         }
 
         const data = JSON.parse(text);
-        
-        console.log(data);
-        alert(JSON.stringify(data));
-        
+
         status.innerHTML = "✅ " + data.message;
         
         if (data.video) {
