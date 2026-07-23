@@ -1,6 +1,7 @@
 const videoInput = document.getElementById("video");
 const lang = document.getElementById("lang");
 const voice = document.getElementById("voice");
+const mode = document.getElementById("mode");
 const status = document.getElementById("status");
 const downloadBtn = document.getElementById("downloadBtn");
 const subtitleBtn = document.getElementById("subtitleBtn");
@@ -18,6 +19,7 @@ async function startDub() {
     formData.append("video", videoInput.files[0]);
     formData.append("language", lang.value);
     formData.append("voice", voice.value);
+    formData.append("mode", mode.value);
 
     try {
 
